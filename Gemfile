@@ -32,10 +32,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# ActiveAdmin
-gem 'activeadmin', github: 'activeadmin'
-
 gem 'pg', '~> 0.18.1'
+
+gem 'bcrypt-ruby', '~> 3.1.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -49,6 +48,12 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.0'
 
-  gem 'factory_girl', '~> 4.5.0'
+  gem "factory_girl_rails", "~> 4.0"
+
+  gem 'shoulda-matchers', '~> 2.8.0', require: false
+
+  gem 'database_cleaner', '~> 1.4.0'
+
+  gem 'faker', '~> 1.4.3'
 end
 

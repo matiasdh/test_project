@@ -44,4 +44,16 @@ RSpec.describe User, type: :model do
       expect(user.is_same_password?('test_password')).to be true
     end
   end
+
+  context 'login' do
+    it "should login a user" do
+      user = create :user, password: 'test_password', email: 'test@test.com'
+      expect(User.login_by({ email: 'test@test.com', password: 'test_password' })).to eq user
+    end
+
+    it "should not login a user" do
+      user = create :user, password: 'test_password', email: 'test@test.com'
+      expect(User.login_by({ email: 'test@test.com', password: 'test' })).to be nil
+    end
+  end
 end

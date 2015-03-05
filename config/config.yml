@@ -1,0 +1,13 @@
+default: &default
+  crypt_key: dbec74fa14f9e055f1a7944ebabc937b
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+# Do not keep production secrets in the repository,
+# instead read values from the environment.
+production:
+  <<: *default

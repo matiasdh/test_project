@@ -14,8 +14,25 @@ class User < ActiveRecord::Base
 
   attr_accessor :password
 
+  def self.login_by(params = {})
+    email = params[:email]
+    password = params[:password]
+    user = User.find_by email: email
+    return nil unless user && user.is_same_password?(password)
+    user.generate_token
+    user
+  end
+
   def is_same_password?(pass)
     encrypted_password == pass.crypt(APP_CONFIG['crypt_key'])
+  end
+
+  def generate_token
+    self.session_token = loop do
+      random_token = SecureRandom.urlsafe_base64(nil, false)
+      break random_token unless User.exists?(session_token: random_token)
+    end
+    save
   end
 
   private

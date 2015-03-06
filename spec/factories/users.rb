@@ -10,5 +10,16 @@ FactoryGirl.define do
         user.generate_token
       end
     end
+
+    factory :user_with_tweets do
+      transient do
+        tweets_count 2
+      end
+
+      after(:create) do |user, evaluator|
+        FactoryGirl.create_list(:tweet, evaluator.tweets_count, user: user)
+        user.reload
+      end
+    end
   end
 end

@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
                             presence: true,
                             uniqueness: true
   validates :password,      length: { minimum: 6 }, if: :update_password?
-  validates :session_token, uniqueness: true
+  validates :session_token, uniqueness: true, allow_blank: true
 
   before_save :encrypt_password
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  context "Validations" do
+  context 'Validations' do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
     it { should validate_presence_of(:email) }
@@ -54,6 +54,14 @@ RSpec.describe User, type: :model do
     it "should not login a user" do
       user = create :user, password: 'test_password', email: 'test@test.com'
       expect(User.login_by({ email: 'test@test.com', password: 'test' })).to be nil
+    end
+  end
+
+  context 'with tweets' do
+    it "should has many tweets" do
+      user = create :user_with_tweets, password: 'test_password'
+      #puts user.tweets.as_json
+      should have_many(:tweets)
     end
   end
 end

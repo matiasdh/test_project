@@ -18,6 +18,7 @@ FactoryGirl.define do
 
       after(:create) do |user, evaluator|
         FactoryGirl.create_list(:tweet, evaluator.tweets_count, user: user)
+        user.generate_token
         user.reload
       end
     end

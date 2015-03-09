@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :tweet do
-    text { Faker::Lorem.paragraph }
+  factory :user_like_tweet do
     user { create :user }
+    tweet { create :tweet }
   end
 end

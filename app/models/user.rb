@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :tweets, dependent: :destroy
+  has_many :user_like_tweets
+  has_many :liked_tweets, through: :user_like_tweets, class_name: 'Tweet'
 
   EMAIL_REGEX = /@/
 

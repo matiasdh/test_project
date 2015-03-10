@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150306155106) do
+ActiveRecord::Schema.define(version: 20150309150107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20150306155106) do
 
   add_index "tweets", ["user_id"], name: "index_tweets_on_user_id", using: :btree
 
+  create_table "user_like_tweets", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "tweet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_like_tweets", ["tweet_id"], name: "index_user_like_tweets_on_tweet_id", using: :btree
+  add_index "user_like_tweets", ["user_id"], name: "index_user_like_tweets_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "first_name"
@@ -36,4 +46,6 @@ ActiveRecord::Schema.define(version: 20150306155106) do
   end
 
   add_foreign_key "tweets", "users"
+  add_foreign_key "user_like_tweets", "tweets"
+  add_foreign_key "user_like_tweets", "users"
 end

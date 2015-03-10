@@ -59,9 +59,15 @@ RSpec.describe User, type: :model do
 
   context 'with tweets' do
     it "should has many tweets" do
-      user = create :user_with_tweets, password: 'test_password'
+      #user = create :user_with_tweets, password: 'test_password'
       #puts user.tweets.as_json
       should have_many(:tweets)
+    end
+  end
+
+  context 'likes' do
+    it "should has many user_liked_tweets" do
+      should have_many(:user_like_tweets)
     end
   end
 end

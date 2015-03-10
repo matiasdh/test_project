@@ -21,9 +21,17 @@ RSpec.describe Api::V1::TweetsController, type: :controller do
     it 'should route to tweets#destroy' do
       expect(delete: '/api/v1/tweets/1').to route_to(controller: 'api/v1/tweets', action: 'destroy', id: '1')
     end
+
+    it 'should route to tweets#like' do
+      expect(post: '/api/v1/tweets/1/like').to route_to(controller: 'api/v1/tweets', action: 'like', id: '1')
+    end
+
+    it 'should route to tweets#dislike' do
+      expect(delete: '/api/v1/tweets/1/like').to route_to(controller: 'api/v1/tweets', action: 'dislike', id: '1')
+    end
   end
 
-  context 'Actions' do
+  context 'Standard Actions' do
     it 'should show the tweet with ID :id' do
       user = create :user_with_tweets, password: 'test_password'
       get :show, id: user.tweets.first.id, token: user.session_token
@@ -59,6 +67,15 @@ RSpec.describe Api::V1::TweetsController, type: :controller do
       to_delete = user.tweets.first.id
       delete :destroy, id: to_delete, token: user.session_token
       expect(user.tweets.count).to eq 1
+    end
+  end
+
+  context 'Like/Dislike' do
+    xit 'should like the tweet with the ID :id' do
+      tweet = create :tweet
+      user = create :logged_user, password: 'test_password'
+      post :like, id: tweet.id, token: user.session_token
+      expect(UserLikeTweet.all.count).to be 1
     end
   end
 end

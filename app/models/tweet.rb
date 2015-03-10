@@ -12,6 +12,6 @@ class Tweet < ActiveRecord::Base
 
   def unliked_by(user)
     to_delete = user_like_tweets.find_by user_id: user.id
-    to_delete.destroy
+    to_delete.destroy unless to_delete == nil
   end
 end

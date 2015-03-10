@@ -43,5 +43,11 @@ RSpec.describe Tweet, type: :model do
       user_a.tweets.first.unliked_by(user_b)
       expect(UserLikeTweet.all.count).to be 0
     end
+
+    it 'should unlike a tweet' do
+      user_a = create :user_with_tweets, password: 'test_password'
+      user_b = create :user_with_tweets, password: 'test_password'
+      expect(user_a.tweets.first.unliked_by(user_b)).to be nil
+    end
   end
 end

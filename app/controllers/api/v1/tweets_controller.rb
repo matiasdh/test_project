@@ -1,5 +1,5 @@
 class Api::V1::TweetsController < Api::V1::ApiController
-  before_action :load_user_tweet, only: [:update, :destroy]
+  before_action :load_user_tweet, only: [:update, :destroy, :like, :dislike]
   def index
     @tweets = Tweet.all
   end
@@ -19,6 +19,16 @@ class Api::V1::TweetsController < Api::V1::ApiController
 
   def update
     @tweet.update!(tweet_params)
+  end
+
+  def like
+    @tweet.liked_by(@current_user)
+    head :no_content
+  end
+
+  def dislike
+    @tweet.unliked_by(@current_user)
+    head :no_content
   end
 
   private

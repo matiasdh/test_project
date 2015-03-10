@@ -1,11 +1,11 @@
 class Api::V1::TweetsController < Api::V1::ApiController
-  before_action :load_user_tweet, only: [:update, :destroy, :like, :dislike]
+  before_action :load_user_tweet, only: [:update, :destroy]
+  before_action :load_tweet, only: [:show, :like, :dislike]
   def index
     @tweets = Tweet.all
   end
 
   def show
-    @tweet = Tweet.find(params[:id])
   end
 
   def create
@@ -35,6 +35,10 @@ class Api::V1::TweetsController < Api::V1::ApiController
 
   def load_user_tweet
     @tweet = current_user.tweets.find params[:id]
+  end
+
+  def load_tweet
+    @tweet = Tweet.find(params[:id])
   end
 
   def tweet_params

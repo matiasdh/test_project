@@ -71,11 +71,19 @@ RSpec.describe Api::V1::TweetsController, type: :controller do
   end
 
   context 'Like/Dislike' do
-    xit 'should like the tweet with the ID :id' do
+    it 'should like the tweet with the ID :id' do
       tweet = create :tweet
       user = create :logged_user, password: 'test_password'
       post :like, id: tweet.id, token: user.session_token
       expect(UserLikeTweet.all.count).to be 1
+    end
+
+    it 'should unlike the tweet with the ID :id' do
+      tweet = create :tweet
+      user = create :logged_user, password: 'test_password'
+      post :like, id: tweet.id, token: user.session_token
+      delete :dislike, id: tweet.id, token: user.session_token
+      expect(UserLikeTweet.all.count).to be 0
     end
   end
 end

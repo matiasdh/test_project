@@ -60,6 +60,8 @@ Rails.application.routes.draw do
       resources :tweets, except: [:new, :edit]
 
       post '/login', to: 'sessions#login'
+      post '/tweets/:id/like', to: 'tweets#like', as: 'like'
+      delete '/tweets/:id/like', to: 'tweets#dislike', as: 'dislike'
 
     end
   end

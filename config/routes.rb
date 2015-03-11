@@ -54,7 +54,17 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  root to: 'home#landing'
+
+
+  scope module: :web do
+    root to: 'home#welcome'
+
+    get 'landing', to: 'home#landing', as: 'landing'
+    get 'mytweets', to: 'home#my_tweets', as: 'mytweets'
+    get 'login', to: 'sessions#new'
+    get 'logout', to: 'sessions#destroy', as: 'logout'
+    post 'loginuser', to: 'sessions#login', as: 'login_user'
+  end
 
   namespace :api do
     namespace :v1 do

@@ -9,7 +9,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   context 'GET users' do
     it 'should show the user with ID :id' do
-      user = create :logged_user, password: 'password'
+      user = create :user_with_tweets, password: 'password'
       get :show, id: user.id, token: user.session_token
       parsed_response = JSON.parse(response.body)
       expect(response).to have_http_status(:success)

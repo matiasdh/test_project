@@ -64,6 +64,8 @@ Rails.application.routes.draw do
     get 'login', to: 'sessions#new'
     get 'logout', to: 'sessions#destroy', as: 'logout'
     post 'loginuser', to: 'sessions#login', as: 'login_user'
+
+    resources :users, only: [:new, :create]
   end
 
   namespace :api do

@@ -3,6 +3,8 @@ class Api::V1::ApiController < ApplicationController
   before_action :authenticate_user!
   before_action :default_format_json
 
+  helper_method :current_user
+
   class AuthenticationException < Exception; end
 
   def default_format_json

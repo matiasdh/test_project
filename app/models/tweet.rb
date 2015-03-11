@@ -14,4 +14,8 @@ class Tweet < ActiveRecord::Base
     to_delete = user_like_tweets.find_by user_id: user.id
     to_delete.destroy unless to_delete.nil?
   end
+
+  def liked_by?(user)
+    user_like_tweets.exists? user_id: user.id
+  end
 end

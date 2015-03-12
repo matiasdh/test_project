@@ -6,6 +6,8 @@ class Tweet < ActiveRecord::Base
   validates :text,     presence: true
   validates :user_id,  presence: true
 
+  scope :latest, -> { order('created_at DESC') }
+
   def liked_by(user)
     user_like_tweets.create user_id: user.id unless user_like_tweets.exists? user_id: user.id
   end

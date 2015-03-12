@@ -8,7 +8,7 @@ class Web::HomeController < Web::WebController
   end
 
   def landing
-    @tweets = Tweet.take(10)
+    @tweets = Tweet.latest.take(10)
   end
 
   def my_tweets

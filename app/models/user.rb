@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   validates :password,      length: { minimum: 6 }, if: :update_password?
   validates :session_token, uniqueness: true, allow_blank: true
 
+  mount_uploader :avatar, AvatarUploader
   before_save :encrypt_password
 
   attr_accessor :password

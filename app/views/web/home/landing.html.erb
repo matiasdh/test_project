@@ -1,14 +1,7 @@
 <div class="container">
   <h1>Latest tweets</h1>
 
-  <table class="table table-striped table-hover">
-    <tr>
-      <th>User</th>
-      <th>Tweet</th>
-    </tr>
-
-    <% @tweets.each do |t| %>
-      <%= render partial: "tweets/tweet", locals: { t: t } %>
-    <% end %>
-  </table>
+  <% @tweets.each do |t| %>
+    <%= render partial: "tweets/tweet", locals: { t: t } %>
+  <% end %>
 </div>

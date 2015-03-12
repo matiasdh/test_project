@@ -1,8 +1,9 @@
 class Api::V1::TweetsController < Api::V1::ApiController
   before_action :load_user_tweet, only: [:update, :destroy]
   before_action :load_tweet, only: [:show, :like, :dislike]
+
   def index
-    @tweets = Tweet.all
+    @tweets = Tweet.latest
   end
 
   def show

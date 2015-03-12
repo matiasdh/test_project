@@ -1,4 +1,9 @@
-<tr>
-  <td><%= t.user.first_name+' '+t.user.last_name%></td>
-  <td><%= t.text%></td>
-</tr>
+<div class="media">
+  <div class="media-left">
+    <img class="media-object" <%= 'src='+t.user.avatar.url.to_s %> >
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading"><%= t.user.first_name+' '+t.user.last_name%></h4>
+    <p><%= t.text%></p>
+  </div>
+</div>
